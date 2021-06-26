@@ -5,15 +5,12 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import { IconButton, Tooltip, makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { ReactComponent as ChessIcon } from "assets/chess-solid.svg";
-import { initChessboard } from "chess";
-import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism-tomorrow.css";
+import CodeEditor from "@uiw/react-textarea-code-editor";
 
-import FindMoveSection from "components/FindMoveSection";
 import Rune from "rune.js";
 import Noise from "rune.noise.js";
 
@@ -168,11 +165,7 @@ const openSvg = (svg) => {
 export default function () {
     const classes = useStyles();
     const outputRel = useRef(null);
-    const [code, setCode] = useState(`var r = new Rune({
-        container: "#canvas",
-        width: 1000,
-        height: 1000
-    });`);
+    const [code, setCode] = useState(``);
     const [hasPackage, setHasPackage] = useState(false);
     const [packageType, setPackageType] = useState(null);
 
@@ -217,17 +210,19 @@ export default function () {
                         ) : null}
                     </FormGroup>
                     <div style={{ maxHeight: 500, overflow: "scroll" }}>
-                        <Editor
+                        <CodeEditor
                             value={code}
-                            onValueChange={(code) => setCode(code)}
-                            highlight={(c) => highlight(c, languages.js)}
-                            padding={10}
+                            language="js"
+                            placeholder="Please enter JS code."
+                            onChange={(evn) => setCode(evn.target.value)}
+                            padding={15}
                             style={{
-                                fontFamily: '"Fira code", "Fira Mono", monospace',
-                                fontSize: 14,
-                                background: "#000",
+                                fontSize: 15,
+                                backgroundColor: "#000",
                                 color: "#fff",
                                 margin: "0 0 30px",
+                                fontFamily:
+                                    "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
                             }}
                         />
                     </div>
