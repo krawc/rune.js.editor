@@ -27,14 +27,6 @@ function Footer() {
             }}
         >
             <Divider style={{ marginBottom: 12 }} />
-            <Typography variant="body2" color="textSecondary" align="center">
-                <Link color="inherit" href="https://portfolio.cyianite.now.sh/">
-                    Christian R. Crisologo - Senior Front-end Developer
-                </Link>
-            </Typography>
-            <Typography variant="caption" color="textSecondary" align="center">
-                Copyright © {new Date().getFullYear()}
-            </Typography>
         </Box>
     );
 }
